@@ -1,0 +1,199 @@
+﻿<!DOCTYPE html>
+<html>
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<title>Chat bot</title>
+<meta name="robots" content="noindex,nofollow"/>
+<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no"/>
+
+<style>
+    #loginButton,button{cursor:pointer;outline:0}*{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}body,html{padding:0;margin:0;overflow:hidden;height:100%}body{font-family:"Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif,roboto;font-size:14px;-webkit-font-smoothing:antialiased;line-height:1.42857143;color:#5c5c5c;background-color:transparent}button{background:0 0;border-style:none;-webkit-transition:all .25s ease;-o-transition:all .25s ease;transition:all .25s ease;z-index:1!important}input,input::-webkit-input-placeholder{font-size:15px}#welcomeScreen{position:absolute;top:0;left:0;height:100%;width:100%}.ios_dwnl,.main-center{left:50%;position:absolute}.main-center{background-color:#fff;border:1px solid #ccc;border-radius:10px;top:50%;text-align:center;max-width:480px;width:95%;-webkit-transform:translate(-50%,-50%);-ms-transform:translate(-50%,-50%);-o-transform:translate(-50%,-50%);transform:translate(-50%,-50%)}.form-top h1{margin:15px 0;font-size:30px;font-weight:400}.form-top h1:after{content:'';display:block;width:300px;height:1px;background:#bbb;margin:10px auto}#onlineUsers{margin:0 auto 10px;color:#ff8000;font-size:18px}.ws-gender label{display:block;font-size:18px;margin-bottom:5px}.ws-gender,.ws-login{max-width:90%;margin:0 auto 25px}#selectGender{background-color:#fff;border-radius:4px;border-color:#ccc;font-size:18px;height:40px;width:100%}#loginButton{background-color:#309dff;box-shadow:0 -3px 3px rgba(41,41,41,.41) inset;border-radius:10px;color:#fff;font-size:32px;font-weight:700;padding:12px;text-transform:uppercase;width:100%}#loginButton:hover{background-color:#2889e1}.form_footer{background:#e0e0e0;color:#505050;margin-top:30px;padding:5px 0;text-align:center}.form_footer a{color:#208ef1}.form_footer p{margin:5px 0 0}.ios_dwnl{bottom:-40px;transform:translate(-50%,100%)}.feedback_link{position:absolute;color:#fff;font-weight:700;text-shadow:1px 1px 1px #222;text-decoration:none}.feedback_link:hover{color:#7bef9d}.feedback_link:before{content:'\f188';font-family:FontAwesome;padding-right:5px}@media only screen and (max-width:600px){#loginButton{font-size:26px}.form-top h1{font-size:25px}#water_mrk{display:none!important}}@media only screen and (max-width:480px){.main-center{top:0;-webkit-transform:translate(-50%,30px);-ms-transform:translate(-50%,30px);-o-transform:translate(-50%,30px);transform:translate(-50%,30px)}.form-top h1:after{width:200px}#onlineUsers{font-size:16px}#loginButton{font-size:22px}.main-center .form_footer{font-size:11px}}@media only screen and (max-width:400px){#loginButton{font-size:20px}.form-top h1{font-size:22px}.ws-gender,.ws-login{margin:0 auto 20px}.form_footer{margin-top:20px}}#rouletteMain{display:none}
+</style>
+<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','http://www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-67226831-1', 'auto');
+		  ga('send', 'pageview');
+
+		</script></head>
+<body>
+<div id="welcomeScreen">
+<div class="main-center">
+<div class="form-top">
+<h1>Cam to Cam Chat</h1>
+</div>
+<form class="form-horizontal" onsubmit="start(); return false;">
+<h4 id="onlineUsers">Strangers online: <span>---</span></h4>
+<div class="ws-gender">
+<label class="gend_lab" for="name">Select Gender:</label>
+<select id="selectGender" placeholder="Select gender" name="gender">
+<option value="m">Man</option>
+<option value="f">Woman</option>
+<option value="c">Couple</option>
+<option value="c">Transgender</option>
+</select>
+</div>
+<div class="ws-login">
+<button id="loginButton" type="submit">Start emulating</button>
+</div>
+<div class="form_footer">
+<span>Warning this site is for Adults <b>18+ Only!</b></span>
+<p>By using this site you agree with our <a title="Terms" href="https://chatki.com/terms/" target="_blank">terms of service.</a></p>
+</div>
+</form>
+</div>
+</div>
+<div id="rouletteMain">
+<div id="headerDiv">
+<div class="cntr_wrap">
+<span id="cntr_sel"><span id="cntr_pref"></span></span>
+<div class="cl_wrap">
+<ul id="cntr_lst">
+<li id="all_cntr"><span>all countries</span></li>
+<li class="flag flag-al">Albania</li>
+<li class="flag flag-dz">Algeria</li>
+<li class="flag flag-ar">Argentina</li>
+<li class="flag flag-am">Armenia</li>
+<li class="flag flag-au">Australia</li>
+<li class="flag flag-at">Austria</li>
+<li class="flag flag-az">Azerbaijan</li>
+<li class="flag flag-by">Belarus</li>
+<li class="flag flag-be">Belgium</li>
+<li class="flag flag-ba">BiH</li>
+<li class="flag flag-br">Brazil</li>
+<li class="flag flag-bg">Bulgaria</li>
+<li class="flag flag-ca">Canada</li>
+<li class="flag flag-cl">Chile</li>
+<li class="flag flag-cn">China</li>
+<li class="flag flag-co">Colombia</li>
+<li class="flag flag-hr">Croatia</li>
+<li class="flag flag-cu">Cuba</li>
+<li class="flag flag-cy">Cyprus</li>
+<li class="flag flag-cz">Czech Republic</li>
+<li class="flag flag-dk">Denmark</li>
+<li class="flag flag-ec">Ecuador</li>
+<li class="flag flag-eg">Egypt</li>
+<li class="flag flag-fi">Finland</li>
+<li class="flag flag-fr">France</li>
+<li class="flag flag-de">Germany</li>
+<li class="flag flag-gr">Greece</li>
+<li class="flag flag-hu">Hungary</li>
+<li class="flag flag-in">India</li>
+<li class="flag flag-id">Indonesia</li>
+<li class="flag flag-ir">Iraq</li>
+<li class="flag flag-ie">Ireland</li>
+<li class="flag flag-il">Israel</li>
+<li class="flag flag-it">Italy</li>
+<li class="flag flag-jp">Japan</li>
+<li class="flag flag-jo">Jordan</li>
+<li class="flag flag-kz">Kazakhstan</li>
+<li class="flag flag-kr">Korea</li>
+<li class="flag flag-lv">Latvia</li>
+<li class="flag flag-lb">Lebanon</li>
+<li class="flag flag-lr">Liberia</li>
+<li class="flag flag-lt">Lithuania</li>
+<li class="flag flag-mk">Macedonia</li>
+<li class="flag flag-my">Malaysia</li>
+<li class="flag flag-mx">Mexico</li>
+<li class="flag flag-md">Moldova</li>
+<li class="flag flag-ma">Morocco</li>
+<li class="flag flag-nl">Netherlands</li>
+<li class="flag flag-nz">New Zealand</li>
+<li class="flag flag-no">Norway</li>
+<li class="flag flag-pk">Pakistan</li>
+<li class="flag flag-pe">Peru</li>
+<li class="flag flag-ph">Philippines</li>
+<li class="flag flag-pl">Poland</li>
+<li class="flag flag-pt">Portugal</li>
+<li class="flag flag-ro">Romania</li>
+<li class="flag flag-ru">Russia</li>
+<li class="flag flag-sa">Saudi Arabia</li>
+<li class="flag flag-rs">Serbia</li>
+<li class="flag flag-sg">Singapore</li>
+<li class="flag flag-sk">Slovakia</li>
+<li class="flag flag-si">Slovenia</li>
+<li class="flag flag-za">South Africa</li>
+<li class="flag flag-es">Spain</li>
+<li class="flag flag-lk">Sri Lanka</li>
+<li class="flag flag-se">Sweden</li>
+<li class="flag flag-ch">Switzerland</li>
+<li class="flag flag-sy">Syria</li>
+<li class="flag flag-th">Thailand</li>
+<li class="flag flag-tn">Tunisia</li>
+<li class="flag flag-tr">Turkey</li>
+<li class="flag flag-ua">Ukraine</li>
+<li class="flag flag-gb">United Kingdom</li>
+<li class="flag flag-us">United States</li>
+<li class="flag flag-uz">Uzbekistan</li>
+<li class="flag flag-ve">Venezuela</li>
+</ul>
+<div id="close_cl">
+<i class="fa fa-times"></i>
+</div>
+</div>
+</div>
+<div id="loadingDiv"></div>
+<button id="rightButton"></button>
+<div class="rv_head">
+<div id="flag"></div>
+<div id="gender"></div>
+</div>
+<div id="water_mrk"></div>
+<div id="message"></div>
+<video id="remoteVideo" autoplay></video>
+<div class="buttonsContainer">
+<button id="toggleVideo"></button>
+<button id="toggleAudio"></button>
+<button id="cancelButton" onclick="location.href = location.href;"></button>
+<button id="report"></button>
+<button id="ChatButton" onclick="toggleChat()"></button>
+</div>
+</div>
+<div class="panel no-border chatDiv" id="chat" style="display: none;">
+<div class="panel-heading wrapper b-b b-light text-sm list-group-item">
+<button class="button" id="closeBtn" onclick="toggleChat()"><i class="fa fa-times" aria-hidden="true"></i></button>
+</div>
+<div id="conversation" class="panel-body chat-body"></div>
+<footer class="panel-footer list-group-item">
+<form class="m-b-none" onsubmit="chat(); return false;" name="msgform" novalidate>
+<div class="input-group">
+<p class="lead emoji-picker-container">
+<input type="text" id="chatMessage" class="form-control" placeholder="Say something" data-emojiable="true">
+</p>
+<span class="input-group-btn">
+<button id="sendBtn" class="btn btn-default" type="submit">SEND</button>
+</span>
+</div>
+</form>
+</footer>
+</div>
+<div id="futterDiv">
+<video id="localVideo" autoplay></video>
+<button class="button" id="switchCameraBtn"></button>
+</div>
+</div>
+<div class="modal fade" id="dialog" role="dialog">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-body" id="dialogBody"></div>
+<div class="modal-footer" id="dialogButtons"></div>
+</div>
+</div>
+</div>
+<script>
+        function loadCss (hf) {
+            var ms=document.createElement("link");ms.rel="stylesheet";
+            ms.href=hf;document.getElementsByTagName("head")[0].appendChild(ms);
+        }
+        loadCss ("https://chatki.com/assets/app/css/app-main-min.css?v1.0");
+    </script>
+<script defer src="http://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+<script defer type="text/javascript" src="http://roulette.chatspin.com/assets/js/roulette-app.js?1425637371"></script>
+<script defer src="https://chatki.com/assets/app/js/app-main.js"></script>
+</body>
+
+
+</html>
